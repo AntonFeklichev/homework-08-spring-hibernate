@@ -18,7 +18,7 @@ import static org.mockito.Mockito.*;
 class UserServiceTest {
 
     @Mock
-    private UserRepository repo;
+    private UserRepository repository;
 
     @InjectMocks
     private UserService service;
@@ -33,30 +33,30 @@ class UserServiceTest {
 
     @Test
     void createDelegatesToRepo() {
-        when(repo.save(user)).thenReturn(user);
+        when(repository.save(user)).thenReturn(user);
 
         User saved = service.create(user);
 
         assertThat(saved).isSameAs(user);
-        verify(repo).save(user);
+        verify(repository).save(user);
     }
 
     @Test
     void getThrowsWhenNotFound() {
-        when(repo.findById(2L)).thenReturn(Optional.empty());
+        when(repository.findById(2L)).thenReturn(Optional.empty());
 
         assertThatThrownBy(() -> service.get(2L))
                 .isInstanceOf(NoSuchElementException.class);
 
-        verify(repo).findById(2L);
+        verify(repository).findById(2L);
     }
 
     @Test
     void getAllReturnsList() {
         List<User> list = List.of(user);
-        when(repo.findAll()).thenReturn(list);
+        when(repository.findAll()).thenReturn(list);
 
         assertThat(service.getAll()).containsExactly(user);
-        verify(repo).findAll();
+        verify(repository).findAll();
     }
 }

@@ -1,6 +1,10 @@
 package antonfeklichev.homework_08_spring_hibernate.config;
 
+import antonfeklichev.homework_08_spring_hibernate.model.User;
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Environment;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,12 +34,12 @@ public class HibernateConfig {
         settings.put(Environment.FORMAT_SQL, formatSql);
         settings.put(Environment.USE_SQL_COMMENTS, comments);
 
-        var registry = new StandardServiceRegistryBuilder()
+        StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .applySettings(settings)
                 .build();
 
-        var metadata = new org.hibernate.boot.MetadataSources(registry)
-                .addAnnotatedClass(antonfeklichev.homework_08_spring_hibernate.model.User.class)
+        Metadata metadata = new MetadataSources(registry)
+                .addAnnotatedClass(User.class)
                 .getMetadataBuilder()
                 .build();
 
