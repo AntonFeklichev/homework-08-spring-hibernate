@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/demo_db
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: password
+
+hibernate:
+  dialect: org.hibernate.dialect.PostgreSQLDialect
+  hbm2ddl:
+    auto: update
+  show_sql: true
+  format_sql: true
+  use_sql_comments: true

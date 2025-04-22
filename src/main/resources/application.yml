@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: homework-08-spring-hibernate
+  profiles:
+    active: h2
+
